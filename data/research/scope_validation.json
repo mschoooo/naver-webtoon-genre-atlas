@@ -1,0 +1,21 @@
+{
+  "raw_n": 4225,
+  "excluded_rate18": 249,
+  "research_n": 3976,
+  "dated_n": 3975,
+  "missing_year_n": 1,
+  "missing_year_id": "347685",
+  "rating_counts": {
+    "RATE_18": 249,
+    "RATE_15": 1687,
+    "RATE_12": 690,
+    "ALL": 1599
+  },
+  "dated_id_set_identical": true,
+  "recomputed_tables": {
+    "annual_metrics.csv": 22,
+    "period_metrics.csv": 5
+  },
+  "raw_sha256": "f7bb8bc4cbdd9ae8ed0781a7d3e8acbd8db559f4f12c527b6a3b44016330f25e",
+  "network_requests": 0
+}
