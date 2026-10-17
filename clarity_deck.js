@@ -29,20 +29,35 @@ const rows=[
 // Orient first-time readers without repeating the findings or adding statistical machinery.
 rows.splice(1,0,['이 발표는 작품 수와 장르의 몫을 살펴봅니다',0,
  `${step('처음 보는 분을 위한 안내','작품이 늘어난 만큼, <em>장르도 고르게 늘었는지 보는 발표입니다.</em>',0)}<p class="explain">대상은 네이버웹툰 목록에서 수집한 연재 중·완결·휴재 작품입니다. 로맨스·판타지·개그 같은 분류를 ‘장르’라고 부릅니다.</p><div class="orientation-cards"><article><span>먼저</span><h3>작품 수를 셉니다</h3><p>각 시기에 새로 시작한 작품이<br>얼마나 많아졌는지 봅니다.</p></article><article><span>그다음</span><h3>장르의 몫을 봅니다</h3><p>전체를 100작품으로 맞추면<br>각 장르가 몇 편쯤 되는지 봅니다.</p></article><article><span>마지막으로</span><h3>고르게 나뉘었는지 봅니다</h3><p>한 장르에 몰렸는지,<br>여러 장르에 나뉘었는지 살핍니다.</p></article></div><div class="orientation-unit"><b>작품 1편 = 비교의 1단위</b><span>작품마다 같은 비중으로 계산합니다.</span></div>${foot('그래프의 작품 수는 현재 목록에서 관측한 값입니다. 조회수나 독서 시간으로 가중하지 않았습니다. 비교 결과와 남는 한계를 함께 설명합니다.')}`]);
+const hook=rows[1];
+hook[0]='두 해 모두 장르는 10개인데 똑같이 다양할까요?';
+hook[2]=`${step('두 장면으로 시작하기','두 해 모두 장르는 10개인데, <em>똑같이 다양할까요?</em>',0)}<p class="explain">현재 목록에서 시작연도가 확인된 작품입니다. 로맨스의 몫만 먼저 눈여겨보세요.</p><div class="hook-cards">${[2015,2022].map(y=>`<article><span>${y}년 시작 · 관측 ${n(A[y].n)}작품</span><h3>장르 종류는 <b>10개</b></h3><div id="hook${y}"></div><p>로맨스의 몫 <strong>${count(+A[y].romance_share*100,{dec:1,suffix:'%'})}</strong></p></article>`).join('')}</div><div class="hook-question">장르의 이름이 많다는 것과 <b>여러 장르가 고르게 나뉜다는 것</b>은 같을까요?</div>${foot('막대 전체가 각 해에 시작한 관측 작품 100%입니다. 주황은 로맨스, 초록 계열은 나머지 장르입니다. 실제 네이버웹툰 전체 신작의 완전한 목록은 아닙니다.')}`;
+const trend=rows.find(row=>row[0]==='집중은 계속 심해지지 않았고 2022년 이후 일부 회복됐습니다');
+trend[2]=`${step('발견 5 / 시간에 따른 변화','집중은 계속 심해지지 않았고, <em>2022년 이후 일부 회복됐습니다.</em>',2)}<div class="metric-primer"><p><b>유효 장르 수</b>는 이 구성의 다양성이 <b>“같은 비중으로 나뉜 장르 몇 개”</b>와 같은지 환산한 값입니다.</p><span>예: 관측된 2022년은 장르 이름이 10개여도, 고른 장르 <strong>5.68개</strong>와 같은 다양성입니다.</span></div><div class="trend-layout"><div>${chart('balanceTrend')}<p class="axis-explainer">높을수록 여러 장르의 비중이 고릅니다. 10개 장르가 같은 비중이면 10입니다.</p></div><aside><span>유효 장르 수 · 실제 장르 이름 수와 다름</span>${[2015,2022,2025].map(y=>`<div><b>${y}년</b><strong>${count(+A[y].effective_genres_shannon,{dec:2,suffix:'개'})}</strong></div>`).join('')}</aside></div>${foot('현재 목록에서 연도를 확인한 작품 중 n≥30인 2008–2025년 기준. 계산은 exp(H), 자세한 방법은 보고서에 있습니다. 2025년은 2024년보다 다시 낮아졌습니다.')}`;
 // Keep the deck compact: comparison safeguards are incorporated into the data slide.
 const safeguards=rows.findIndex(row=>row[0]==='적은 작품과 미완성 연도에 휘둘리지 않게 확인했습니다');
 if(safeguards>=0)rows.splice(safeguards,1);
 const dataRow=rows.find(row=>row[0]==='날짜를 아는 3,975작품으로 비교합니다');
 dataRow[2]=dataRow[2].replace(foot('원본 CSV는 그대로 보존했습니다. 장르는 현재의 대표 장르 분류를 사용했습니다.'),
  `<div class="data-safeguards"><span>시간 그래프: 2008–2025년 · 연도별 30작품 이상</span><span>2026년은 부분 연도이므로 연간 비교에서 제외</span></div>${foot('원본 CSV와 현재의 대표 장르 분류를 사용했습니다. 같은 작품 수로 맞춘 점검에서도 2022년 하락·이후 부분 회복이 유지됐습니다. 계산은 보고서에 보존했습니다.')}`);
-const extraIndex=rows.findIndex(row=>row[0]==='연도를 모르는 250작품 때문에 전체의 변화는 확정할 수 없습니다');
-rows.splice(extraIndex,0,['회차를 아는 작품의 약 75%는 100회 이하입니다',2,
+const extraIndex=rows.length;
+rows.splice(extraIndex,0,['부록 · 회차를 아는 작품의 약 75%는 100회 이하입니다',4,
  `${step('장르 밖의 작은 발견 / 회차 수','회차를 아는 작품의 <em>약 75%는 100회 이하</em>입니다.',2)}<p class="explain">회차를 확인한 ${n(E.known_n)}작품의 수집 시점 값입니다. 작품마다 누적 회차 수에는 큰 차이가 있습니다.</p>${chart('episodeShare')}<div class="episode-context"><div><span>회차 수의 가운데 값(중앙값)</span><strong>${count(E.median,{suffix:'회'})}</strong></div><div><span>회차 수의 최댓값</span><strong>${count(E.max,{suffix:'회'})}</strong></div><p>이 발표에서는 회차가 달라도<br><b>각각 1작품으로 셉니다.</b></p></div>${foot('이 장은 회차 확인 3,976건 기준(결측 249건 제외)이며 연도 확인 표본과 다릅니다. 연재 중·휴재 포함, 최종 길이가 아닙니다. 유료·미리보기·공지 등이 포함될 수 있습니다.')}`]);
+const appendix=rows[rows.length-1];
+appendix[3]='appendix';
+appendix[2]=appendix[2].replace(step('장르 밖의 작은 발견 / 회차 수','회차를 아는 작품의 <em>약 75%는 100회 이하</em>입니다.',2),step('부록 / 회차 수 · 본문과 별도의 참고','회차를 아는 작품의 <em>약 75%는 100회 이하</em>입니다.',4));
+appendix[2]=appendix[2].replace('회차를 확인한 '+n(E.known_n)+'작품의 수집 시점 값입니다. 작품마다 누적 회차 수에는 큰 차이가 있습니다.','장르 분석을 마친 뒤 보는 별도 참고입니다. 현재 목록에서 회차를 확인한 '+n(E.known_n)+'작품의 수집 시점 값입니다.');
 rows.filter(row=>row[1]===3).forEach(row=>row[2]=row[2].replace('검증 2 / 모르는 데이터','검증 1 / 모르는 데이터').replace('검증 3 / 더 확실하게 말할 수 있는 것','검증 2 / 더 확실하게 말할 수 있는 것'));
 const conclusion=rows.find(row=>row[1]===4);
 conclusion[2]=conclusion[2].replace('<button class="credits-trigger">작품 이미지 출처</button>',
- '<a href="data/research/episode_analysis_note.md" target="_blank" rel="noopener">회차 수 추가 점검 ↗</a><button class="credits-trigger">작품 이미지 출처</button>');
-document.getElementById('deck').innerHTML=rows.map(([title,stage,body,cls=''],i)=>`<section class="slide story ${cls} ${i===0?'active':''}" data-title="${esc(title)}" data-stage="${stage}" aria-hidden="${i!==0}">${body}<footer class="slide-footer"><span>WEBTOON / DIVERSITY</span><span>${String(i+1).padStart(2,'0')} / ${rows.length}</span></footer></section>`).join('');
+ '<button id="appendixJump">부록: 회차 수 →</button><button class="credits-trigger">작품 이미지 출처</button>');
+// Maintain the distinction between this observed catalog and all historical launches.
+rows[0][2]=rows[0][2].replace('작품 수만 늘었는지,<br>여러 장르가 고르게 늘었는지 살펴봅니다.','현재 목록에서 확인한 작품으로,<br>장르의 비중 변화를 살펴봅니다.');
+rows.forEach(row=>{
+ row[0]=row[0].replace(/^신작은 늘었지만/,'관측 신작은 늘었지만');
+ row[2]=row[2].replace('신작은 늘었지만, <em>','관측 신작은 늘었지만, <em>').replace('작품이 많아졌다는 것은 분명합니다.','현재 목록에서 확인한 신작이 더 많습니다.').replace('두 해 모두 10개 장르가 있었습니다.','관측 작품에서는 두 해 모두 10개 장르가 확인됐습니다.');
+});
+document.getElementById('deck').innerHTML=rows.map(([title,stage,body,cls=''],i)=>`<section class="slide story ${cls} ${i===0?'active':''}" data-title="${esc(title)}" data-stage="${stage}" aria-hidden="${i!==0}">${body}<footer class="slide-footer"><span>현재 목록에서 확인한 작품 기준${cls==='appendix'?' · 부록':''}</span><span>${String(i+1).padStart(2,'0')} / ${rows.length}</span></footer></section>`).join('');
 document.getElementById('creditsContent').innerHTML=`<p>표지에 사용한 네이버웹툰 공식 썸네일입니다. 원작 이미지의 권리는 각 권리자에게 있습니다.</p>${R.artworks.map(o=>`<a href="${o.work_url}" target="_blank" rel="noopener"><b>${esc(o.title)}</b><span>${esc(o.authors)}</span></a>`).join('')}<p><a href="assets/artwork_sources.json">원본 이미지 URL과 파일 기록 ↗</a></p>`;
 
 // Statistical graphics: geometric encodings of the existing numerical data.
@@ -70,9 +85,10 @@ const mixColors=['#db7b59','#5d7e62','#6b8a6a','#779773','#83a27c','#8eae84','#9
 const mixPalette=Object.fromEntries(D.genres.map((g,i)=>[g,mixColors[i]]));
 function mixture(id,year){let s='',at=0;const w=1050,h=90,total=+A[year].n;D.genres.forEach(g=>{let v=D.annual[year][g]||0,ww=w*v/total;s+=rect(at,12,ww,66,mixPalette[g],`class="mix-part" data-tip="${year} · ${esc(g)} ${pct(v/total)} (${v}/${total}작품)"`);at+=ww});svg(id,w,h,s)}
 mixture('mix2015',2015);mixture('mix2022',2022);
+mixture('hook2015',2015);mixture('hook2022',2022);
 document.getElementById('mixLegend').innerHTML=D.genres.map(g=>`<span><i style="background:${mixPalette[g]}"></i>${g}</span>`).join('');
 {
- const data=R.annual.filter(o=>+o.year>=2008&&+o.year<=2025),w=1035,h=355,l=65,r=55,t=32,b=50,min=5,max=8,
+ const data=R.annual.filter(o=>+o.year>=2008&&+o.year<=2025),w=1035,h=255,l=65,r=55,t=32,b=50,min=5,max=8,
  X=y=>l+(y-2008)/17*(w-l-r),Y=v=>t+(max-v)/(max-min)*(h-t-b);let s='';
  [5,6,7,8].forEach(v=>s+=grid(l,Y(v),w-r,Y(v))+txt(l-18,Y(v)+7,v,'text-anchor="end" font-size="21" fill="#708167"'));
  [2008,2011,2014,2017,2020,2023,2025].forEach(y=>s+=txt(X(y),h-12,y,'text-anchor="middle" font-size="19" fill="#708167"'));
@@ -91,7 +107,7 @@ const labels=new Map();
 document.querySelectorAll('.count-up,.chart-number').forEach(el=>labels.set(el,el.textContent));
 function animateSlide(s){
  animations.forEach(a=>a.pause());animations=[];
- const targets=s.querySelectorAll('.story-header,h1,h2,.explain,.data-route,.plain-callout,.genre-cards article,.scenario-list article,.final-statement p,.result-strip,.check-cards article,.waffle-compare>div,.mix-example,.trend-layout aside,.robust-conclusion,.art-grid,.orientation-cards article,.orientation-unit,.episode-context,.data-safeguards');
+ const targets=s.querySelectorAll('.story-header,h1,h2,.explain,.data-route,.plain-callout,.genre-cards article,.scenario-list article,.final-statement p,.result-strip,.check-cards article,.waffle-compare>div,.mix-example,.trend-layout aside,.robust-conclusion,.art-grid,.orientation-cards article,.orientation-unit,.episode-context,.data-safeguards,.hook-cards article,.hook-question,.metric-primer');
  anime.remove(targets);anime.set(targets,{opacity:1,translateY:0});
  s.querySelectorAll('.count-up,.chart-number').forEach(el=>el.textContent=labels.get(el));
  s.querySelectorAll('.grow-bar').forEach(el=>el.setAttribute('width',el.dataset.width||el.getAttribute('width')));
@@ -113,6 +129,7 @@ document.getElementById('prev').onclick=()=>go(current-1);document.getElementByI
 document.getElementById('overview').onclick=()=>document.getElementById('toc').showModal();document.getElementById('closeToc').onclick=()=>document.getElementById('toc').close();
 document.getElementById('fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
 document.getElementById('replay').onclick=()=>animateSlide(slides[current]);
+document.getElementById('appendixJump').onclick=()=>go(rows.length-1);
 document.querySelectorAll('.credits-trigger').forEach(el=>el.onclick=()=>document.getElementById('credits').showModal());document.getElementById('closeCredits').onclick=()=>document.getElementById('credits').close();
 addEventListener('keydown',e=>{if(document.querySelector('dialog[open]')||e.target.closest('input,textarea,select'))return;if(e.key===' '&&e.target.closest('a,button'))return;if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){e.preventDefault();go(current+1)}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(current-1)}if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1);if(e.key.toLowerCase()==='f')document.getElementById('fullscreen').click();if(e.key.toLowerCase()==='o')document.getElementById('overview').click();if(e.key.toLowerCase()==='r')animateSlide(slides[current]);});
 let sx=0;addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>70)go(current+(dx<0?1:-1))},{passive:true});
