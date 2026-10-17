@@ -13,3 +13,7 @@ Serve locally with `python -m http.server 8000`. All data/chart code is static. 
 
 ## Interpretation
 Current observed genre labels are grouped by first-episode year. This is a descriptive comparison of the observed catalog, not historical popularity or causality. 2026 is partial. Missing dates remain missing.
+
+## Image generation status
+
+Cover and chapter artwork is pending: Gemini Nano Banana / Nano Banana 2 returned HTTP 429 with a zero image-generation quota. No image was generated. The deck uses its dark-green background until assets are available. Prompts and status are recorded in `assets/generation_manifest.json`. The API key remains outside this repository.

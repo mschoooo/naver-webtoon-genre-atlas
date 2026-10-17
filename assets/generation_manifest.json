@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "file": "cover.png",
+    "model": "gemini-3.1-flash-image",
+    "prompt": "Wide cinematic editorial illustration for a Korean webtoon research presentation. A sculptural flowing ribbon of blank comic panels and unprinted paper pages sweeping from lower right to upper right, subtle halftone texture, deep forest green background, luminous mint green and cream accents. Elegant gallery quality, dramatic light, abstract and sophisticated. Left half mostly quiet dark negative space for HTML headline. No text, no letters, no numbers, no logos, no watermarks, no charts or data. Landscape 16:9.",
+    "status": "not_generated",
+    "reason": "HTTP 429: image generation quota is 0; no substitute AI image used"
+  },
+  {
+    "file": "chapter.png",
+    "model": "gemini-3.1-flash-image",
+    "prompt": "Wide cinematic editorial illustration, visual companion to a deep green webtoon research presentation. An abstract landscape of layered blank comic paper panels morphing from warm cream and orange on the left to mint and forest green on the right, a single winding ribbon connecting eras, subtle halftone grain, sophisticated minimal museum installation. Lower and left areas quiet with dark forest green negative space for HTML overlay. No text, letters, numbers, logos, watermarks, charts or statistics. Landscape 16:9.",
+    "status": "not_generated",
+    "reason": "HTTP 429: image generation quota is 0; no substitute AI image used"
+  }
+]
