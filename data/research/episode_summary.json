@@ -1,0 +1,37 @@
+{
+  "source_sha256": "f7bb8bc4cbdd9ae8ed0781a7d3e8acbd8db559f4f12c527b6a3b44016330f25e",
+  "raw_n": 4225,
+  "known_n": 3976,
+  "missing_n": 249,
+  "le100_n": 2976,
+  "le100_share": 0.7484909456740443,
+  "gt100_n": 1000,
+  "gt100_share": 0.2515090543259557,
+  "median": 63.0,
+  "max": 1414,
+  "mean": 84.74522132796781,
+  "status": [
+    {
+      "status": "완결",
+      "known_n": 2767,
+      "le100_n": 2078,
+      "le100_share": 0.7509938561619082,
+      "median": 66
+    },
+    {
+      "status": "연재 중",
+      "known_n": 898,
+      "le100_n": 662,
+      "le100_share": 0.7371937639198218,
+      "median": 57.0
+    },
+    {
+      "status": "휴재",
+      "known_n": 311,
+      "le100_n": 236,
+      "le100_share": 0.7588424437299035,
+      "median": 58
+    }
+  ],
+  "interpretation": "Current observed episode totals; not final length, reading time, popularity, or a historical change."
+}

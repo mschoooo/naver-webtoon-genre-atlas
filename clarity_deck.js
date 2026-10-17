@@ -1,6 +1,6 @@
 /* Beginner-friendly research story. All numbers come from the validated CSV summaries. */
 'use strict';
-const R=window.RESEARCH,D=window.STATS;
+const R=window.RESEARCH,D=window.STATS,E=window.EPISODES;
 const A=Object.fromEntries(R.annual.map(o=>[+o.year,o]));
 const P=Object.fromEntries(R.periods.map(o=>[o.period,o]));
 const OLD=P['2010–2014'],NEW=P['2020–2024'];
@@ -26,6 +26,22 @@ const rows=[
  ['로맨스 비중 확대는 알려진 결측을 고려해도 유지됩니다',3,`${step('검증 3 / 더 확실하게 말할 수 있는 것','로맨스 비중 확대는 <em>알려진 결측을 고려해도 유지됩니다.</em>',3)}<p class="explain">과거의 로맨스 비중을 최대한 높이고 최근 비중을 최대한 낮춰도, 최근이 더 높습니다.</p>${chart('robustBars')}<div class="robust-conclusion">${count(+R.bounds.find(o=>o.period==='2010–2014').upper*100,{dec:1,suffix:'%'})}<span>보다</span>${count(+R.bounds.find(o=>o.period==='2020–2024').lower*100,{dec:1,suffix:'%'})}<span>가 여전히 높습니다.</span></div>${foot('알려진 연도 결측 250건만 고려한 경계입니다. 과거 상한 29.2%, 최근 하한 31.8%. 관측되지 않은 과거 작품까지 포함하는 보장은 아닙니다.')}`],
  ['신작은 늘었지만 장르가 꾸준히 다양해진 것은 아닙니다',4,`${step('연구 질문에 대한 답','신작은 늘었지만, <em>장르가 꾸준히 다양해진 것은 아닙니다.</em>',4)}<p class="explain">현재 목록에서 시작연도가 확인된 작품을 기준으로 내릴 수 있는 결론입니다.</p><div class="final-statement"><p><span>확인한 것</span><b>최근 비교 구간에서 로맨스의 몫이 커졌습니다.</b></p><p><span>함께 기억할 것</span><b>집중과 회복이 번갈아 나타났습니다.</b></p><p><span>아직 모르는 것</span><b>플랫폼 전체 역사가 더 획일화됐는지는 확정할 수 없습니다.</b></p></div><div class="final-boundary">현재의 장르 분류 · 불완전한 과거 목록 · 시작연도 결측을 반영한 해석</div><div class="final-resources"><a href="data/research/analysis_report.html" target="_blank" rel="noopener">상세 분석 보고서 ↗</a><a href="data/naver_webtoon_raw.csv" download>원본 CSV ↓</a><button class="credits-trigger">작품 이미지 출처</button></div>${foot('상세 보고서에 Shannon·HHI, 표본 크기 점검, 구성 분해와 전체 연도 표를 보존했습니다. 통계 수치는 검증된 기존 집계만 사용했습니다.')}`]
 ];
+// Orient first-time readers without repeating the findings or adding statistical machinery.
+rows.splice(1,0,['이 발표는 작품 수와 장르의 몫을 살펴봅니다',0,
+ `${step('처음 보는 분을 위한 안내','작품이 늘어난 만큼, <em>장르도 고르게 늘었는지 보는 발표입니다.</em>',0)}<p class="explain">대상은 네이버웹툰 목록에서 수집한 연재 중·완결·휴재 작품입니다. 로맨스·판타지·개그 같은 분류를 ‘장르’라고 부릅니다.</p><div class="orientation-cards"><article><span>먼저</span><h3>작품 수를 셉니다</h3><p>각 시기에 새로 시작한 작품이<br>얼마나 많아졌는지 봅니다.</p></article><article><span>그다음</span><h3>장르의 몫을 봅니다</h3><p>전체를 100작품으로 맞추면<br>각 장르가 몇 편쯤 되는지 봅니다.</p></article><article><span>마지막으로</span><h3>고르게 나뉘었는지 봅니다</h3><p>한 장르에 몰렸는지,<br>여러 장르에 나뉘었는지 살핍니다.</p></article></div><div class="orientation-unit"><b>작품 1편 = 비교의 1단위</b><span>작품마다 같은 비중으로 계산합니다.</span></div>${foot('그래프의 작품 수는 현재 목록에서 관측한 값입니다. 조회수나 독서 시간으로 가중하지 않았습니다. 비교 결과와 남는 한계를 함께 설명합니다.')}`]);
+// Keep the deck compact: comparison safeguards are incorporated into the data slide.
+const safeguards=rows.findIndex(row=>row[0]==='적은 작품과 미완성 연도에 휘둘리지 않게 확인했습니다');
+if(safeguards>=0)rows.splice(safeguards,1);
+const dataRow=rows.find(row=>row[0]==='날짜를 아는 3,975작품으로 비교합니다');
+dataRow[2]=dataRow[2].replace(foot('원본 CSV는 그대로 보존했습니다. 장르는 현재의 대표 장르 분류를 사용했습니다.'),
+ `<div class="data-safeguards"><span>시간 그래프: 2008–2025년 · 연도별 30작품 이상</span><span>2026년은 부분 연도이므로 연간 비교에서 제외</span></div>${foot('원본 CSV와 현재의 대표 장르 분류를 사용했습니다. 같은 작품 수로 맞춘 점검에서도 2022년 하락·이후 부분 회복이 유지됐습니다. 계산은 보고서에 보존했습니다.')}`);
+const extraIndex=rows.findIndex(row=>row[0]==='연도를 모르는 250작품 때문에 전체의 변화는 확정할 수 없습니다');
+rows.splice(extraIndex,0,['회차를 아는 작품의 약 75%는 100회 이하입니다',2,
+ `${step('장르 밖의 작은 발견 / 회차 수','회차를 아는 작품의 <em>약 75%는 100회 이하</em>입니다.',2)}<p class="explain">회차를 확인한 ${n(E.known_n)}작품의 수집 시점 값입니다. 작품마다 누적 회차 수에는 큰 차이가 있습니다.</p>${chart('episodeShare')}<div class="episode-context"><div><span>회차 수의 가운데 값(중앙값)</span><strong>${count(E.median,{suffix:'회'})}</strong></div><div><span>회차 수의 최댓값</span><strong>${count(E.max,{suffix:'회'})}</strong></div><p>이 발표에서는 회차가 달라도<br><b>각각 1작품으로 셉니다.</b></p></div>${foot('이 장은 회차 확인 3,976건 기준(결측 249건 제외)이며 연도 확인 표본과 다릅니다. 연재 중·휴재 포함, 최종 길이가 아닙니다. 유료·미리보기·공지 등이 포함될 수 있습니다.')}`]);
+rows.filter(row=>row[1]===3).forEach(row=>row[2]=row[2].replace('검증 2 / 모르는 데이터','검증 1 / 모르는 데이터').replace('검증 3 / 더 확실하게 말할 수 있는 것','검증 2 / 더 확실하게 말할 수 있는 것'));
+const conclusion=rows.find(row=>row[1]===4);
+conclusion[2]=conclusion[2].replace('<button class="credits-trigger">작품 이미지 출처</button>',
+ '<a href="data/research/episode_analysis_note.md" target="_blank" rel="noopener">회차 수 추가 점검 ↗</a><button class="credits-trigger">작품 이미지 출처</button>');
 document.getElementById('deck').innerHTML=rows.map(([title,stage,body,cls=''],i)=>`<section class="slide story ${cls} ${i===0?'active':''}" data-title="${esc(title)}" data-stage="${stage}" aria-hidden="${i!==0}">${body}<footer class="slide-footer"><span>WEBTOON / DIVERSITY</span><span>${String(i+1).padStart(2,'0')} / ${rows.length}</span></footer></section>`).join('');
 document.getElementById('creditsContent').innerHTML=`<p>표지에 사용한 네이버웹툰 공식 썸네일입니다. 원작 이미지의 권리는 각 권리자에게 있습니다.</p>${R.artworks.map(o=>`<a href="${o.work_url}" target="_blank" rel="noopener"><b>${esc(o.title)}</b><span>${esc(o.authors)}</span></a>`).join('')}<p><a href="assets/artwork_sources.json">원본 이미지 URL과 파일 기록 ↗</a></p>`;
 
@@ -34,6 +50,12 @@ const txt=(x,y,t,a='')=>`<text x="${x}" y="${y}" ${a}>${esc(t)}</text>`;
 const rect=(x,y,w,h,c,a='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}" ${a}/>`;
 const grid=(x,y,x2,y2)=>`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="#d5ddcb"/>`;
 const svg=(id,w,h,s)=>document.getElementById(id).innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(document.getElementById(id).closest('.slide').dataset.title)}">${s}</svg>`;
+{
+ const w=1424,h=215,left=45,right=45,top=40,pw=w-left-right,ww=pw*E.le100_share;
+ let s=rect(left,top,ww,84,'#2e7e55',`class="grow-bar" data-seq="0" data-tip="100회 이하 ${n(E.le100_n)} / ${n(E.known_n)}작품 (${pct(E.le100_share)})"`)+rect(left+ww,top,pw-ww,84,'#c4cfb6',`class="grow-bar" data-seq="1" data-tip="100회 초과 ${n(E.gt100_n)} / ${n(E.known_n)}작품 (${pct(E.gt100_share)})"`);
+ s+=txt(left+ww/2,top+53,pct(E.le100_share),'text-anchor="middle" font-size="36" font-weight="800" class="episode-white"')+txt(left+ww+(pw-ww)/2,top+53,pct(E.gt100_share),'text-anchor="middle" font-size="30" font-weight="700"');
+ s+=txt(left,top+128,'100회 이하 · '+n(E.le100_n)+'작품','font-size="25" font-weight="600"')+txt(w-right,top+128,'100회 초과 · '+n(E.gt100_n)+'작품','text-anchor="end" font-size="25"');svg('episodeShare',w,h,s);
+}
 {
  const w=1424,h=350,l=280,r=120,t=48,bw=w-l-r,max=2100;let s='';
  [[OLD,'2010–2014',0],[NEW,'2020–2024',1]].forEach(([o,label,i])=>{let y=t+i*145,ww=+o.n/max*bw;s+=txt(l-35,y+38,label,'text-anchor="end" font-size="29" font-weight="600"')+rect(l,y,ww,66,i?'#297c55':'#a6baa0',`class="grow-bar" data-seq="${i}" data-tip="${label} · ${o.n}작품"`)+txt(l+ww+20,y+44,n(o.n)+'편',`class="chart-number" data-value="${o.n}" data-dec="0" data-suffix="편" data-seq="${i}" font-size="42" font-weight="800"`)});svg('growthBars',w,h,s);
@@ -69,7 +91,7 @@ const labels=new Map();
 document.querySelectorAll('.count-up,.chart-number').forEach(el=>labels.set(el,el.textContent));
 function animateSlide(s){
  animations.forEach(a=>a.pause());animations=[];
- const targets=s.querySelectorAll('.story-header,h1,h2,.explain,.data-route,.plain-callout,.genre-cards article,.scenario-list article,.final-statement p,.result-strip,.check-cards article,.waffle-compare>div,.mix-example,.trend-layout aside,.robust-conclusion,.art-grid');
+ const targets=s.querySelectorAll('.story-header,h1,h2,.explain,.data-route,.plain-callout,.genre-cards article,.scenario-list article,.final-statement p,.result-strip,.check-cards article,.waffle-compare>div,.mix-example,.trend-layout aside,.robust-conclusion,.art-grid,.orientation-cards article,.orientation-unit,.episode-context,.data-safeguards');
  anime.remove(targets);anime.set(targets,{opacity:1,translateY:0});
  s.querySelectorAll('.count-up,.chart-number').forEach(el=>el.textContent=labels.get(el));
  s.querySelectorAll('.grow-bar').forEach(el=>el.setAttribute('width',el.dataset.width||el.getAttribute('width')));
