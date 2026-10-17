@@ -1,0 +1,92 @@
+[
+  {
+    "id": "183559",
+    "title": "신의 탑",
+    "authors": "SIU",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=183559",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/183559/thumbnail/thumbnail_IMAG21_5f3fec31-5c95-4afe-a73f-3046288edb47.jpg",
+    "file": "assets/webtoon-183559.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "d36c686a3f0b099b9502507bac78d24f3cd96b1338ce5b5242e8c65bcc80c0ba",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  },
+  {
+    "id": "641253",
+    "title": "외모지상주의",
+    "authors": "박태준",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=641253",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/641253/thumbnail/thumbnail_IMAG21_01672165-03c8-44b1-ba0e-ef82c9cfcd10.jpg",
+    "file": "assets/webtoon-641253.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "2ecfd0d4ff73da14e85729fa90266b00d5ffc22479b3ea1380d3793568da08fc",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  },
+  {
+    "id": "703846",
+    "title": "여신강림",
+    "authors": "야옹이",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=703846",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/703846/thumbnail/thumbnail_IMAG21_3617626786448291892.jpg",
+    "file": "assets/webtoon-703846.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "1104c42c4223afc72e369fdf63dce9e4e89d017bce0df3caac3ec0dbb05462a7",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  },
+  {
+    "id": "20853",
+    "title": "마음의소리",
+    "authors": "조석",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=20853",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/20853/thumbnail/thumbnail_IMAG21_a715d0bd-fe55-4658-a573-669e0c0261f6.jpg",
+    "file": "assets/webtoon-20853.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "7d1840153f162d39f0a2939a415fe67d3d355572ed96569b7b6aba00ee1e7b5d",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  },
+  {
+    "id": "747269",
+    "title": "전지적 독자 시점",
+    "authors": "UMI / 슬리피-C / 싱숑",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=747269",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/747269/thumbnail/thumbnail_IMAG21_aabd9952-ff45-47a2-a543-33f19a5c6708.jpg",
+    "file": "assets/webtoon-747269.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "8762b19eeedea31581325264cd534cf8a69ad717fc890d722eedd5cd55abbf76",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  },
+  {
+    "id": "651673",
+    "title": "유미의 세포들",
+    "authors": "이동건",
+    "work_url": "https://comic.naver.com/webtoon/list?titleId=651673",
+    "image_url": "https://shared-comic.pstatic.net/thumb/webtoon/651673/thumbnail/thumbnail_IMAG21_fba9683b-260e-4a07-984c-deda6d87f62d.jpg",
+    "file": "assets/webtoon-651673.jpg",
+    "dimensions": [
+      480,
+      623
+    ],
+    "sha256": "f37fedc61f85eff452e33e70ebee947a68c22b9e44b1da5be35185f66361d417",
+    "usage": "cover and section transitions only; illustrative, not statistical evidence",
+    "copyright": "Original artwork belongs to its respective rights holders; source attribution is not a license."
+  }
+]

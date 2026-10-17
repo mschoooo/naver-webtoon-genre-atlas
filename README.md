@@ -1,19 +1,41 @@
-# ???? ?? ? ????? ?? ??
+﻿# 많아진 작품, 다양해진 장르?
 
-16:9 HTML presentation. Use arrows, Home/End, O (overview), F (fullscreen), or touch swipe.
+네이버웹툰 신규 연재 규모와 장르 다양성을 분석하는 **16:9 HTML 슬라이드 16장**입니다.
 
-- Source: 4,225 works, collected 2026-10-17. Trend sample: 3,975 known-date works.
-- Charts: native JavaScript/SVG, based on unchanged CSV. No generated statistical graphics.
-- Animations: anime.js 3.2.2 (MIT), vendored locally.
-- Data and reports: `data/`.
-- Google Fonts Noto Sans KR has local system font fallback.
-- Print CSS supports 16:9 slide pages.
+Published: https://mschoooo.github.io/naver-webtoon-genre-atlas/
 
-Serve locally with `python -m http.server 8000`. All data/chart code is static. No API keys are shipped.
+## 실행과 조작
 
-## Interpretation
-Current observed genre labels are grouped by first-episode year. This is a descriptive comparison of the observed catalog, not historical popularity or causality. 2026 is partial. Missing dates remain missing.
+이 폴더에서 `python -m http.server 8000`을 실행하거나 index.html을 브라우저로 엽니다.
 
-## Image generation status
+- 방향키 / Page Up·Down: 이동. Home / End: 처음 / 마지막.
+- O: 목차. F: 전체 화면. 좌우 터치 스와이프 지원.
+- 브라우저 인쇄: 16:9 페이지. 동작 줄이기 OS 설정 지원.
 
-Cover and chapter artwork is pending: Gemini Nano Banana / Nano Banana 2 returned HTTP 429 with a zero image-generation quota. No image was generated. The deck uses its dark-green background until assets are available. Prompts and status are recorded in `assets/generation_manifest.json`. The API key remains outside this repository.
+## 자료와 그래프
+
+- 원본: data/naver_webtoon_raw.csv, 4,225작품.
+- 게시연도 확인 3,975건. 결측 250건은 대치하지 않았습니다.
+- 주 관계 분석: n≥30인 완전 연도 2008–2025년, 18개 연도.
+- 2026년은 부분 연도로 연간 관계 분석에서 제외했습니다.
+- data/research/의 CSV는 원본에서 계산한 분석 집계표입니다.
+- research_deck.js가 data/research.js 및 data/stats.js를 읽어 SVG 그래프를 그립니다.
+- data/research/analysis_report.html에 전체 분석 방법·결과·한계를 기록했습니다.
+- 애니메이션: 로컬 포함 anime.js 3.2.2(MIT).
+- Google Fonts Noto Sans KR은 시스템 글꼴 대체 경로가 있습니다.
+
+Source CSV SHA-256: f7bb8bc4cbdd9ae8ed0781a7d3e8acbd8db559f4f12c527b6a3b44016330f25e
+
+## 이미지
+
+표지와 섹션 전환(1·5·11장)에만 네이버웹툰 공식 썸네일 6개를 사용합니다. 통계 차트에는 래스터 이미지가 없습니다.
+
+신의 탑, 외모지상주의, 여신강림, 마음의소리, 전지적 독자 시점, 유미의 세포들.
+
+작품명·작가·작품 링크·원본 이미지 URL·해시는 assets/artwork_sources.json과 마지막 슬라이드에 기록했습니다. 원작 이미지의 권리는 각 권리자에게 있습니다. 출처 표기는 재사용 라이선스를 의미하지 않습니다. 이미지는 발표용 예시이며 통계의 대표 표본이 아닙니다. 이미지에 텍스트나 통계 수치를 생성·합성하지 않았습니다.
+
+## 해석과 배포
+
+현재 관측 목록의 현재 대표 장르를 첫 회차 게시연도에 연결한 기술적 분석입니다. 불완전한 과거 목록과 연도 결측 때문에 전체 역사적 다양성 감소로 일반화할 수 없습니다. 상관·구성 분해는 인과 추정이 아닙니다.
+
+GitHub Pages는 main 브랜치 루트를 배포합니다. API 키·Google 로그인 세션은 이 저장소에 포함하지 않습니다.
